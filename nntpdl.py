@@ -50,8 +50,8 @@ def get_file(message_ids, group=None, filename=None, sizes=None):
         try:
             f += get_part(m, group=group)
         except NNTPTemporaryError:
-            debug(f"Couldn't get that article, adding 0x00 * {str(sizes[n])}")
-            f += b"\0" * sizes[n]
+            debug(f"Couldn't get that article, skipping")
+            #f += b"\0" * sizes[n]
             continue
     if filename:
         with open(os.path.join(dest, filename), "wb") as fh:
